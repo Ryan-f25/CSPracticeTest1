@@ -6,7 +6,6 @@ public class StarshipExplorer {
 
     //This is the arraylist of UFOs
     public ArrayList<Alien> UFOs = new ArrayList<Alien>();
-    public ArrayList<Integer> energyLevelArrayList = new ArrayList<Integer>();
 
     //This is the constructor of the StarshipExplorer class
     public StarshipExplorer() {
@@ -19,14 +18,18 @@ public class StarshipExplorer {
 
         //This calls the displayAliens method
         displayAliens();
+        System.out.println("Below is the sorted list");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
         //This calls the bubbleSort methods and sorts by energy levels
-        bubbleSort();
+        //bubbleSort();
+        selectionSort();
         //This then calls the displayAlines methods again to make sure sorting was successful
         displayAliens();
 
-
     }
-
     public static void main(String[] args){
         //This is the StarshipExplorer object
         StarshipExplorer StarshipExplorer = new StarshipExplorer();
@@ -57,6 +60,9 @@ public class StarshipExplorer {
 
                     //These three lines of code swap the bigger number with the smaller number
                     //So the order will be correct
+                    //You use the temporary variable because you would lose get(y) if you did not have it
+                    //You are storing the second element in the first index, so you have the set the first element
+                    //To the temporary element so you do not lose it
                     Alien temp = UFOs.get(y);
                     UFOs.set(y, UFOs.get(y+1));
                     UFOs.set(y+1,temp);
@@ -65,6 +71,27 @@ public class StarshipExplorer {
             }
         }
 
-
     }
+
+    //This method sorts the hostility levels by selectionSort
+    //It sets a minimum value then goes through the rest of the values and see if any other elemt is less than the minimum
+    //If it is, it sets the minimum to the new element
+    //And if not it goes through and swaps the minimum with the first non-switched element
+    //See visualGo for a visual
+    public void selectionSort() {
+        for( int v=0; v<UFOs.size()-1; v++){
+            int min = v;
+            for (int c=v+1; c<UFOs.size(); c++) {
+                if (UFOs.get(c).hostilityLevel < UFOs.get(min).hostilityLevel) {
+                    min = c;
+
+                }
+                Alien temp = UFOs.get(v);
+                UFOs.set(v, UFOs.get(min));
+                UFOs.set(min, temp);
+
+            }
+        }
+    }
+
 }
